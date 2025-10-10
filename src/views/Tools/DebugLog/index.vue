@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { getDebugLog } from '@/api/debug'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import type { DebugLog } from '@/api/debug/types.ts'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import {
   Pagination,
@@ -16,7 +17,7 @@ import {
   PaginationItem,
   PaginationEllipsis
 } from '@/components/ui/pagination'
-import { FileText, Eye, ChevronDown, ChevronRight } from 'lucide-vue-next'
+import { FileText, Eye, ChevronDown, ChevronRight, Search, X } from 'lucide-vue-next'
 import { toast } from 'vue-sonner'
 
 // 定义组件名称
@@ -29,6 +30,9 @@ const logList = ref<DebugLog[]>([])
 const isLoading = ref(false)
 const selectedLog = ref<DebugLog | null>(null)
 const isDialogOpen = ref(false)
+
+// 筛选状态
+const searchKeyword = ref('')
 
 // 分页状态
 const pagination = ref({
@@ -127,12 +131,47 @@ const viewDetail = (log: DebugLog) => {
   isDialogOpen.value = true
 }
 
+// 筛选后的日志列表
+const filteredLogList = computed(() => {
+  if (!searchKeyword.value.trim()) {
+    return logList.value
+  }
+
+  const keyword = searchKeyword.value.toLowerCase().trim()
+  return logList.value.filter((log) => {
+    const creator = log.creator || ''
+    return creator.toLowerCase().includes(keyword)
+  })
+})
+
+// 筛选后的分页总数
+const filteredTotal = computed(() => filteredLogList.value.length)
+
+// 当前页显示的日志列表（分页后）
+const paginatedLogList = computed(() => {
+  const start = (pagination.value.current - 1) * pagination.value.pageSize
+  const end = start + pagination.value.pageSize
+  return filteredLogList.value.slice(start, end)
+})
+
 // 处理分页变化
 const handlePageChange = (page: number) => {
-  if (page < 1 || page > Math.ceil(pagination.value.total / pagination.value.pageSize)) {
+  const maxPage = Math.ceil(filteredTotal.value / pagination.value.pageSize)
+  if (page < 1 || page > maxPage) {
     return
   }
-  getLogList(page, pagination.value.pageSize)
+  pagination.value.current = page
+}
+
+// 清除搜索
+const clearSearch = () => {
+  searchKeyword.value = ''
+  pagination.value.current = 1
+}
+
+// 监听搜索关键词变化，重置到第一页
+const handleSearch = () => {
+  pagination.value.current = 1
 }
 
 // 初始化加载
@@ -150,6 +189,24 @@ getLogList()
         <CardDescription>查看系统调试日志和详细信息</CardDescription>
       </CardHeader>
       <CardContent>
+        <!-- 搜索框 -->
+        <div v-if="!isLoading && logList.length > 0" class="mb-4">
+          <div class="flex items-center gap-2 max-w-md">
+            <div class="relative flex-1">
+              <Search class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Input v-model="searchKeyword" placeholder="搜索用户名..." class="pl-9 pr-9" @input="handleSearch" />
+              <button
+                v-if="searchKeyword"
+                class="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                @click="clearSearch"
+              >
+                <X class="h-4 w-4" />
+              </button>
+            </div>
+            <div class="text-sm text-muted-foreground whitespace-nowrap">{{ filteredTotal }} 条结果</div>
+          </div>
+        </div>
+
         <!-- 加载状态 -->
         <div v-if="isLoading" class="flex items-center justify-center py-12">
           <div class="flex items-center gap-2">
@@ -162,6 +219,13 @@ getLogList()
         <div v-else-if="logList.length === 0" class="flex flex-col items-center justify-center py-12">
           <FileText class="h-12 w-12 text-muted-foreground mb-4" />
           <p class="text-muted-foreground">暂无日志数据</p>
+        </div>
+
+        <!-- 筛选后无结果 -->
+        <div v-else-if="filteredLogList.length === 0" class="flex flex-col items-center justify-center py-12">
+          <Search class="h-12 w-12 text-muted-foreground mb-4" />
+          <p class="text-muted-foreground mb-2">未找到匹配的用户</p>
+          <Button variant="link" @click="clearSearch">清除搜索</Button>
         </div>
 
         <!-- 日志表格 -->
@@ -177,7 +241,7 @@ getLogList()
               </TableRow>
             </TableHeader>
             <TableBody>
-              <TableRow v-for="log in logList" :key="log.id">
+              <TableRow v-for="log in paginatedLogList" :key="log.id">
                 <!-- ID -->
                 <TableCell class="font-medium text-center">{{ log.id }}</TableCell>
 
@@ -237,12 +301,15 @@ getLogList()
         </div>
 
         <!-- 分页 -->
-        <div v-if="logList.length > 0" class="mt-4 flex justify-between items-center">
-          <div class="text-sm text-muted-foreground flex-shrink-0">共 {{ pagination.total }} 条记录</div>
+        <div v-if="filteredLogList.length > 0" class="mt-4 flex justify-between items-center">
+          <div class="text-sm text-muted-foreground flex-shrink-0">
+            共 {{ filteredTotal }} 条结果
+            <span v-if="searchKeyword" class="ml-2 text-xs"> (从 {{ pagination.total }} 条记录中筛选) </span>
+          </div>
           <Pagination
             v-slot="{ page }"
             :items-per-page="pagination.pageSize"
-            :total="pagination.total"
+            :total="filteredTotal"
             :sibling-count="1"
             show-edges
             :default-page="pagination.current"
@@ -266,7 +333,7 @@ getLogList()
               </template>
 
               <PaginationNext @click="handlePageChange(page + 1)" />
-              <PaginationLast @click="handlePageChange(Math.ceil(pagination.total / pagination.pageSize))" />
+              <PaginationLast @click="handlePageChange(Math.ceil(filteredTotal / pagination.pageSize))" />
             </PaginationContent>
           </Pagination>
         </div>
