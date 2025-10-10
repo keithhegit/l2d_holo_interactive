@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import {
   Pagination,
@@ -131,7 +132,7 @@ const viewDetail = (log: DebugLog) => {
   isDialogOpen.value = true
 }
 
-// 筛选后的日志列表
+// 前端筛选后的日志列表
 const filteredLogList = computed(() => {
   if (!searchKeyword.value.trim()) {
     return logList.value
@@ -144,34 +145,28 @@ const filteredLogList = computed(() => {
   })
 })
 
-// 筛选后的分页总数
-const filteredTotal = computed(() => filteredLogList.value.length)
-
-// 当前页显示的日志列表（分页后）
-const paginatedLogList = computed(() => {
-  const start = (pagination.value.current - 1) * pagination.value.pageSize
-  const end = start + pagination.value.pageSize
-  return filteredLogList.value.slice(start, end)
-})
-
 // 处理分页变化
 const handlePageChange = (page: number) => {
-  const maxPage = Math.ceil(filteredTotal.value / pagination.value.pageSize)
-  if (page < 1 || page > maxPage) {
-    return
-  }
-  pagination.value.current = page
+  if (page === pagination.value.current) return
+  getLogList(page, pagination.value.pageSize)
+}
+
+// 处理每页数量变化
+const handlePageSizeChange = (value: string) => {
+  const newPageSize = parseInt(value)
+  pagination.value.pageSize = newPageSize
+  // 重新加载第一页
+  getLogList(1, newPageSize)
+}
+
+// 处理搜索（前端筛选，不需要调用接口）
+const handleSearch = () => {
+  // 前端筛选，无需操作
 }
 
 // 清除搜索
 const clearSearch = () => {
   searchKeyword.value = ''
-  pagination.value.current = 1
-}
-
-// 监听搜索关键词变化，重置到第一页
-const handleSearch = () => {
-  pagination.value.current = 1
 }
 
 // 初始化加载
@@ -189,21 +184,43 @@ getLogList()
         <CardDescription>查看系统调试日志和详细信息</CardDescription>
       </CardHeader>
       <CardContent>
-        <!-- 搜索框 -->
+        <!-- 搜索框和筛选 -->
         <div v-if="!isLoading && logList.length > 0" class="mb-4">
-          <div class="flex items-center gap-2 max-w-md">
-            <div class="relative flex-1">
-              <Search class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input v-model="searchKeyword" placeholder="搜索用户名..." class="pl-9 pr-9" @input="handleSearch" />
-              <button
-                v-if="searchKeyword"
-                class="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-                @click="clearSearch"
-              >
-                <X class="h-4 w-4" />
-              </button>
+          <div class="flex items-center gap-3 flex-wrap">
+            <!-- 搜索框 -->
+            <div class="flex items-center gap-2 flex-1 min-w-[300px]">
+              <div class="relative flex-1">
+                <Search class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input v-model="searchKeyword" placeholder="搜索用户名..." class="pl-9 pr-9" @input="handleSearch" />
+                <button
+                  v-if="searchKeyword"
+                  class="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                  @click="clearSearch"
+                >
+                  <X class="h-4 w-4" />
+                </button>
+              </div>
+              <div class="text-sm text-muted-foreground whitespace-nowrap">
+                {{ filteredLogList.length }} / {{ logList.length }} 条
+              </div>
             </div>
-            <div class="text-sm text-muted-foreground whitespace-nowrap">{{ filteredTotal }} 条结果</div>
+
+            <!-- 每页数量选择 -->
+            <div class="flex items-center gap-2">
+              <span class="text-sm text-muted-foreground whitespace-nowrap">每页显示</span>
+              <Select :model-value="pagination.pageSize.toString()" @update:model-value="handlePageSizeChange">
+                <SelectTrigger class="w-[100px]">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="5">5 条</SelectItem>
+                  <SelectItem value="10">10 条</SelectItem>
+                  <SelectItem value="20">20 条</SelectItem>
+                  <SelectItem value="50">50 条</SelectItem>
+                  <SelectItem value="100">100 条</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
         </div>
 
@@ -241,7 +258,7 @@ getLogList()
               </TableRow>
             </TableHeader>
             <TableBody>
-              <TableRow v-for="log in paginatedLogList" :key="log.id">
+              <TableRow v-for="log in filteredLogList" :key="log.id">
                 <!-- ID -->
                 <TableCell class="font-medium text-center">{{ log.id }}</TableCell>
 
@@ -301,15 +318,16 @@ getLogList()
         </div>
 
         <!-- 分页 -->
-        <div v-if="filteredLogList.length > 0" class="mt-4 flex justify-between items-center">
+        <div v-if="logList.length > 0" class="mt-4 flex justify-between items-center">
           <div class="text-sm text-muted-foreground flex-shrink-0">
-            共 {{ filteredTotal }} 条结果
-            <span v-if="searchKeyword" class="ml-2 text-xs"> (从 {{ pagination.total }} 条记录中筛选) </span>
+            <span v-if="searchKeyword"> 当前页显示 {{ filteredLogList.length }} / {{ logList.length }} 条， </span>
+            共 {{ pagination.total }} 条记录
           </div>
           <Pagination
+            :key="`pagination-${pagination.current}`"
             v-slot="{ page }"
             :items-per-page="pagination.pageSize"
-            :total="filteredTotal"
+            :total="pagination.total"
             :sibling-count="1"
             show-edges
             :default-page="pagination.current"
@@ -323,7 +341,7 @@ getLogList()
                 <PaginationItem v-if="item.type === 'page'" :key="index" :value="item.value" as-child>
                   <Button
                     class="w-9 h-9 p-0"
-                    :variant="item.value === page ? 'default' : 'outline'"
+                    :variant="item.value === pagination.current ? 'default' : 'outline'"
                     @click="handlePageChange(item.value)"
                   >
                     {{ item.value }}
@@ -333,7 +351,7 @@ getLogList()
               </template>
 
               <PaginationNext @click="handlePageChange(page + 1)" />
-              <PaginationLast @click="handlePageChange(Math.ceil(filteredTotal / pagination.pageSize))" />
+              <PaginationLast @click="handlePageChange(Math.ceil(pagination.total / pagination.pageSize))" />
             </PaginationContent>
           </Pagination>
         </div>
