@@ -68,7 +68,8 @@
     "vite-plugin-pwa": "^1.2.0",
     "vite-plugin-vconsole": "^2.1.1",
     "vite-plugin-vue-devtools": "^7.7.5",
-    "vue-tsc": "^2.2.8"
+    "vue-tsc": "^2.2.8",
+    "workbox-window": "^7.4.0"
   },
   "config": {
     "commitizen": {
