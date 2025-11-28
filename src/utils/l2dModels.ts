@@ -19,6 +19,7 @@ export const models: Model[] = [
     characterId: 100430,
     name: '白切黑护士',
     actionCount: 5,
+    cover: 'https://pub-c98d5902eedf42f6a9765dfad981fd88.r2.dev/L2D/1534.jpg',
     tags: ['Rose', 'Live2D']
   },
   {
@@ -29,6 +30,7 @@ export const models: Model[] = [
     characterId: 100402,
     name: '毒舌傲娇大小姐',
     actionCount: 4,
+    cover: 'https://pub-c98d5902eedf42f6a9765dfad981fd88.r2.dev/L2D/1678.jpg',
     tags: ['Isolde2', 'Live2D']
   },
   {
@@ -39,6 +41,7 @@ export const models: Model[] = [
     characterId: 100498,
     name: '天降系妹妹',
     actionCount: 4,
+    cover: 'https://pub-c98d5902eedf42f6a9765dfad981fd88.r2.dev/L2D/2106.jpg',
     tags: ['Lumi', 'Live2D']
   },
   {
@@ -49,6 +52,7 @@ export const models: Model[] = [
     characterId: 100455,
     name: '赛博陪玩',
     actionCount: 2,
+    cover: 'https://pub-c98d5902eedf42f6a9765dfad981fd88.r2.dev/L2D/2145.jpg',
     tags: ['Mika', 'Live2D']
   },
   {
@@ -59,6 +63,7 @@ export const models: Model[] = [
     characterId: 100408,
     name: '摸鱼女大学生',
     actionCount: 8,
+    cover: 'https://pub-c98d5902eedf42f6a9765dfad981fd88.r2.dev/L2D/2146.jpg',
     tags: ['Chloe', 'Live2D']
   },
   {
@@ -69,6 +74,7 @@ export const models: Model[] = [
     characterId: 100410,
     name: '不受控制的时间跳跃者',
     actionCount: 7,
+    cover: 'https://pub-c98d5902eedf42f6a9765dfad981fd88.r2.dev/L2D/2202.jpg',
     tags: ['ruby0', 'Live2D']
   },
   {
@@ -79,6 +85,7 @@ export const models: Model[] = [
     characterId: 100411,
     name: '网络调情者',
     actionCount: 4,
+    cover: 'https://pub-c98d5902eedf42f6a9765dfad981fd88.r2.dev/L2D/2217.jpg',
     tags: ['Elena', 'Live2D']
   },
   {
@@ -89,6 +96,7 @@ export const models: Model[] = [
     characterId: 100448,
     name: '危险AI恋人',
     actionCount: 4,
+    cover: 'https://pub-c98d5902eedf42f6a9765dfad981fd88.r2.dev/L2D/2242.jpg',
     tags: ['mikamale', 'Live2D']
   },
   {
@@ -99,6 +107,7 @@ export const models: Model[] = [
     characterId: 100403,
     name: '看起来乖巧的女同桌',
     actionCount: 4,
+    cover: 'https://pub-c98d5902eedf42f6a9765dfad981fd88.r2.dev/L2D/2731.jpg',
     tags: ['rin4', 'Live2D']
   },
   {
@@ -109,6 +118,7 @@ export const models: Model[] = [
     characterId: 100405,
     name: '神出鬼没的冷面间谍',
     actionCount: 3,
+    cover: 'https://pub-c98d5902eedf42f6a9765dfad981fd88.r2.dev/L2D/2762.png',
     tags: ['astra4', 'Live2D']
   },
   {
@@ -119,6 +129,7 @@ export const models: Model[] = [
     characterId: 100399,
     name: '失忆小厨娘',
     actionCount: 3,
+    cover: 'https://pub-c98d5902eedf42f6a9765dfad981fd88.r2.dev/L2D/2784.png',
     tags: ['aria3', 'Live2D']
   },
   {
@@ -129,6 +140,7 @@ export const models: Model[] = [
     characterId: 100406,
     name: '记忆调酒师',
     actionCount: 5,
+    cover: 'https://pub-c98d5902eedf42f6a9765dfad981fd88.r2.dev/L2D/2830.jpg',
     tags: ['lily2', 'Live2D']
   },
   {
@@ -139,6 +151,7 @@ export const models: Model[] = [
     characterId: 100475,
     name: '坏脾气仿生人',
     actionCount: 4,
+    cover: 'https://pub-c98d5902eedf42f6a9765dfad981fd88.r2.dev/L2D/2849.jpg',
     tags: ['reno1', 'Live2D']
   },
   {
@@ -149,6 +162,7 @@ export const models: Model[] = [
     characterId: 100519,
     name: '万圣节鬼魂',
     actionCount: 1,
+    cover: 'https://pub-c98d5902eedf42f6a9765dfad981fd88.r2.dev/L2D/2900.jpg',
     tags: ['g36c2', 'Live2D']
   },
   {
@@ -159,6 +173,7 @@ export const models: Model[] = [
     characterId: 100519,
     name: '万圣节鬼魂转换',
     actionCount: 3,
+    cover: 'https://pub-c98d5902eedf42f6a9765dfad981fd88.r2.dev/L2D/2943.jpg',
     tags: ['g36ctrans', 'Live2D']
   },
   {
@@ -169,6 +184,7 @@ export const models: Model[] = [
     characterId: 100478,
     name: '野蛮发小居然是女孩子',
     actionCount: 8,
+    cover: 'https://pub-c98d5902eedf42f6a9765dfad981fd88.r2.dev/L2D/2972.jpg',
     tags: ['rowan', 'Live2D']
   }
 ]

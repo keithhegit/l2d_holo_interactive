@@ -23,8 +23,8 @@ const filtered = () => {
   return list
 }
 
-const getCover = (folderName: string) => {
-  return `https://ugenie.net/api/uploads/live2d/${folderName}/preview.png`
+const getCover = (model: any) => {
+  return model.cover || `https://ugenie.net/api/uploads/live2d/${model.folderName}/preview.png`
 }
 
 const handleImgError = (e: Event) => {
@@ -79,7 +79,7 @@ const selectModel = (folderName: string) => {
         <!-- 左侧封面 -->
         <div class="w-24 h-24 sm:w-28 sm:h-28 flex-shrink-0 rounded-2xl overflow-hidden bg-white/10">
           <img
-            :src="getCover(model.folderName)"
+            :src="getCover(model)"
             :alt="model.folderName"
             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             loading="lazy"
