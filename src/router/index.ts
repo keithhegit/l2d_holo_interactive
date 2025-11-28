@@ -7,7 +7,7 @@ const routes = [
     component: () => import('@/views/Landing/index.vue')
   },
   {
-    path: '/render/:name',
+    path: '/tool/live2d/:name',
     name: 'Live2DRender',
     component: () => import('@/views/Tools/Live2DTool/index.vue')
   },
