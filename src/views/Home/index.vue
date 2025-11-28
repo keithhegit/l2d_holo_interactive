@@ -6,7 +6,7 @@ defineOptions({
   name: 'HomePage'
 })
 
-const greeting = ref('欢迎使用聚合工具')
+const greeting = ref('欢迎使用 UGN私密互动')
 const stats = ref([
   { name: '总数据源', value: '12', icon: '📊' },
   { name: '活跃连接', value: '8', icon: '🔗' },

@@ -7,7 +7,7 @@ defineOptions({
   name: 'DashboardPage'
 })
 
-const greeting = ref('欢迎使用聚合工具')
+const greeting = ref('欢迎使用 UGN私密互动')
 
 const currentTime = ref(new Date().toLocaleTimeString())
 

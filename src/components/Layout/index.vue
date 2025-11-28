@@ -112,7 +112,7 @@ const handleLogout = async () => {
           <!-- Logo -->
           <div class="flex items-center mr-6">
             <img src="/icon_transparent.png" alt="Logo" class="h-8 w-auto mr-2" />
-            <span class="text-xl font-bold">聚合工具</span>
+            <span class="text-xl font-bold">UGN私密互动</span>
           </div>
 
           <!-- 主菜单项 -->
