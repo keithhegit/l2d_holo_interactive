@@ -12,6 +12,8 @@ import { Button } from '@/components/ui/button'
 import { Slider } from '@/components/ui/slider'
 import { SliderRange, SliderTrack } from 'reka-ui'
 import { Switch } from '@/components/ui/switch'
+import { models } from '@/utils/l2dModels'
+
 const route = useRoute()
 const router = useRouter()
 const aspectRatio = ref([0.15])
@@ -29,7 +31,7 @@ const anchor = ref({
 const { open, onChange } = useFileDialog({
   accept: 'image/*' // Set to accept only image files
 })
-const onlineUrl = 'https://livco.me/api/uploads/live2d/?/model.json'
+const onlineUrl = 'https://ugenie.net/api/uploads/live2d/?/FileReferences_Physics_0.json'
 const show = ref(true)
 const modelPath = ref('')
 // const fileList = ref([])
@@ -212,7 +214,12 @@ onMounted(() => {
   window.addEventListener('holo3d-gesture', gestureHandler)
   const name = route.params.name as string | undefined
   if (name) {
-    modelPath.value = onlineUrl.replace('?', name)
+    const model = models.find((m) => m.folderName === name)
+    if (model) {
+      modelPath.value = model.url
+    } else {
+      modelPath.value = onlineUrl.replace('?', name)
+    }
     reset()
   }
 })
@@ -245,7 +252,12 @@ onBeforeUnmount(() => {
           >
             <button
               class="absolute top-2 left-2 px-2 py-1 text-xs bg-gray-200 dark:bg-gray-700 rounded"
-              @click="() => { clear(); router.push('/') }"
+              @click="
+                () => {
+                  clear()
+                  router.push('/')
+                }
+              "
             >
               返回
             </button>
@@ -1301,5 +1313,4 @@ defineExpose({
 </style>
 
 -->
-const route = useRoute()
-const router = useRouter()
+const route = useRoute() const router = useRouter()
