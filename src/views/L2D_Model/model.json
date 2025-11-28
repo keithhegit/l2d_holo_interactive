@@ -1,0 +1,495 @@
+{
+  "Version": 3,
+  "Type": 0,
+  "FileReferences": {
+    "Moc": "FileReferences_Moc_0.moc3",
+    "Textures": [
+      "FileReferences_Textures_0_0.png",
+      "FileReferences_Textures_1_0.png"
+    ],
+    "Physics": "FileReferences_Physics_0.json",
+    "PhysicsV2": { "File": "FileReferences_Physics_0.json" },
+    "Motions": {
+      "Idle": [{ "File": "FileReferences_Motions_Idle_0_File_0.json" }],
+      "摸胸": [
+        {
+          "File": "FileReferences_Motions_TapTouchSpecial_0_File_0.json",
+          "Sound": "FileReferences_Motions_TapTouchSpecial_0_Sound_0.wav",
+          "Text": "據說，人感到最幸福的時刻，也是其血液最美味的時刻呢~",
+          "Interruptable": true
+        }
+      ],
+      "摸身体": [
+        {
+          "File": "FileReferences_Motions_TapTouchBody_0_File_0.json",
+          "Sound": "FileReferences_Motions_TapTouchBody_0_Sound_0.wav",
+          "Text": "欸——我還不想起來，再讓我坐會~",
+          "Interruptable": true
+        }
+      ],
+      "摸头": [
+        {
+          "File": "FileReferences_Motions_TapTouchHead_0_File_0.json",
+          "Sound": "FileReferences_Motions_TapTouchHead_0_Sound_0.wav",
+          "Text": "我沒睏，只是打個哈欠而已…",
+          "Interruptable": true
+        }
+      ],
+      "右眼": [
+        {
+          "File": "FileReferences_Motions_TapArtMesh162_0_File_0.json",
+          "Sound": "FileReferences_Motions_TapArtMesh162_0_Sound_0.wav",
+          "Text": "大蒜？十字架？那種東西對我可沒有用哦。吸血鬼都是這種設定？那我只要把這個設定吃掉就好了~",
+          "Interruptable": true
+        }
+      ],
+      "左眼": [
+        {
+          "File": "FileReferences_Motions_TapArtMesh150_0_File_0.json",
+          "Sound": "FileReferences_Motions_TapArtMesh150_0_Sound_0.wav",
+          "Text": "塞德利茨，所謂“扮演”只要把自己想像成那個角色就好了，不用顧忌那麼多的~",
+          "Interruptable": true
+        }
+      ],
+      "摸右手": [
+        {
+          "File": "FileReferences_Motions_TapArtMesh24_0_File_0.json",
+          "Sound": "FileReferences_Motions_TapArtMesh24_0_Sound_0.wav",
+          "Text": "欸，人家在這裡專心扮演，你怎麼一副心不在焉的樣子…不行，我要咬你兩口讓你清醒清醒！",
+          "Interruptable": true
+        }
+      ],
+      "摸左手": [
+        {
+          "File": "FileReferences_Motions_TapArtMesh209_0_File_0.json",
+          "Sound": "FileReferences_Motions_TapArtMesh209_0_Sound_0.wav",
+          "Text": "給，郵件。順手拿的不用謝我~",
+          "Interruptable": true
+        }
+      ],
+      "摸乳沟": [
+        {
+          "File": "FileReferences_Motions_TapArtMesh191_0_File_0.json",
+          "Sound": "FileReferences_Motions_TapArtMesh191_0_Sound_0.wav",
+          "Text": "這樣一來，原本自由自在的我，就被“感情”所束縛了呢。誰叫我是自願這麼做的呢~能讓我心甘情願聽話，可是獨屬於你一個人的特權哦。你也要付出相應的代價，在生活中的各個方面好好彌補我才行~",
+          "Interruptable": true
+        }
+      ],
+      "摸右腿": [
+        {
+          "File": "FileReferences_Motions_TapArtMesh407_0_File_0.json",
+          "Sound": "FileReferences_Motions_TapArtMesh407_0_Sound_0.wav",
+          "Text": "任務？聽起來就好麻煩……反正你一個人也能搞定的吧？",
+          "Interruptable": true
+        }
+      ],
+      "摸左腿": [
+        {
+          "File": "FileReferences_Motions_TapArtMesh263_0_File_0.json",
+          "Sound": "FileReferences_Motions_TapArtMesh263_0_Sound_0.wav",
+          "Text": "任務完成了哦。 ……看著我幹嘛，是你的任務完成了，又不是我的。",
+          "Interruptable": true
+        }
+      ],
+      "摸头发": [
+        {
+          "File": "FileReferences_Motions_TapArtMesh132_0_File_0.json",
+          "Sound": "FileReferences_Motions_TapArtMesh132_0_Sound_0.wav",
+          "Text": "哦豁，負責委託的同伴們已經回來了。不去迎接她們沒關係麼？",
+          "Interruptable": true
+        }
+      ],
+      "左上角红花": [
+        {
+          "File": "FileReferences_Motions_TapArtMesh59_0_File_0.json",
+          "Sound": "FileReferences_Motions_TapArtMesh59_0_Sound_0.wav",
+          "Text": "兜兜轉轉了一陣子，最終還是回到我身邊了呢。這個就是“來自吸血鬼古堡的詛咒”的設定~",
+          "Interruptable": true
+        }
+      ],
+      "右上角红花": [
+        {
+          "File": "FileReferences_Motions_TapArtMesh57_0_File_0.json",
+          "Sound": "FileReferences_Motions_TapArtMesh57_0_Sound_0.wav",
+          "Text": "歡迎回來，指揮官。今天的“鮮血”準備好了嗎？當然指的是葡萄酒哦~",
+          "Interruptable": true
+        }
+      ],
+      "choice": [
+        {
+          "Name": "menu",
+          "Text": "menu",
+          "Choices": [
+            { "Text": "mouse_tracking enable", "NextMtn": "mouth_switch:on" },
+            { "Text": "mouse_tracking disable", "NextMtn": "mouth_switch:off" },
+            { "Text": "login", "NextMtn": "TapArtMesh57" },
+            { "Text": "main_1", "NextMtn": "TapArtMesh162" },
+            { "Text": "main_2", "NextMtn": "TapArtMesh150" },
+            { "Text": "main_3", "NextMtn": "TapArtMesh24" },
+            { "Text": "touch_1", "NextMtn": "TapTouchBody" },
+            { "Text": "touch_2", "NextMtn": "TapTouchSpecial" },
+            { "Text": "touch_3", "NextMtn": "TapTouchHead" },
+            { "Text": "mission", "NextMtn": "TapArtMesh407" },
+            { "Text": "mission_complete", "NextMtn": "TapArtMesh263" },
+            { "Text": "mail", "NextMtn": "TapArtMesh209" },
+            { "Text": "home", "NextMtn": "TapArtMesh59" },
+            { "Text": "expedition", "NextMtn": "TapArtMesh132" },
+            { "Text": "wedding", "NextMtn": "TapArtMesh191" },
+            { "Text": "BJ0", "NextMtn": "BJ0:BJ0" },
+            { "Text": "BJ1", "NextMtn": "BJ1:BJ1" },
+            { "Text": "BJ2", "NextMtn": "BJ2:BJ2" },
+            { "Text": "HJ0", "NextMtn": "HJ0:HJ0" },
+            { "Text": "HJ1", "NextMtn": "HJ1:HJ_1" },
+            { "Text": "param_hit enable", "NextMtn": "hit_switch:on" },
+            { "Text": "param_hit disable", "NextMtn": "hit_switch:off" }
+          ]
+        }
+      ],
+      "hit_switch": [
+        {
+          "Name": "on",
+          "Text": "param_hit enable(開啟滑鼠拖曳)",
+          "Command": "param_hit enable"
+        },
+        {
+          "Name": "off",
+          "Text": "param_hit disable(關閉滑鼠拖曳)",
+          "Command": "param_hit disable"
+        }
+      ],
+      "mouth_switch": [
+        {
+          "Name": "on",
+          "Text": "mouse_tracking enable(開啟滑鼠追蹤)",
+          "Choices": [{}],
+          "Command": "mouse_tracking enable",
+          "VarFloats": [
+            { "Name": "var1", "Type": 1, "Code": "equal 0" },
+            { "Name": "var1", "Type": 2, "Code": "assign 1" }
+          ]
+        },
+        {
+          "Name": "off",
+          "Text": "mouse_tracking disable(關閉滑鼠追蹤)",
+          "Command": "mouse_tracking disable",
+          "VarFloats": [
+            { "Name": "var1", "Type": 1, "Code": "equal 1" },
+            { "Name": "var1", "Type": 2, "Code": "assign 0" }
+          ]
+        }
+      ],
+      "BJ0": [
+        {
+          "Name": "BJ0",
+          "File": "FileReferences_Motions_BJ0_0_File_0.json",
+          "Command": "extra_motion disable",
+          "PostCommand": "extra_motion enable",
+          "Interruptable": true
+        }
+      ],
+      "BJ1": [
+        {
+          "Name": "BJ1",
+          "File": "FileReferences_Motions_BJ1_0_File_0.json",
+          "Command": "extra_motion disable",
+          "PostCommand": "extra_motion enable",
+          "Interruptable": true
+        }
+      ],
+      "BJ2": [
+        {
+          "Name": "BJ2",
+          "File": "FileReferences_Motions_BJ2_0_File_0.json",
+          "Command": "extra_motion disable",
+          "PostCommand": "extra_motion enable",
+          "Interruptable": true
+        }
+      ],
+      "HJ0": [
+        { "Name": "HJ0", "File": "FileReferences_Motions_HJ0_0_File_0.json" }
+      ],
+      "HJ1": [
+        { "Name": "HJ_1", "File": "FileReferences_Motions_HJ1_0_File_0.json" }
+      ],
+      "Start": [
+        {
+          "Name": "mouse_tracking disable",
+          "File": "FileReferences_Motions_TapArtMesh57_0_File_0.json",
+          "Sound": "FileReferences_Motions_TapArtMesh57_0_Sound_0.wav",
+          "Text": "歡迎回來，指揮官。今天的“鮮血”準備好了嗎？當然指的是葡萄酒哦~",
+          "Command": "mouse_tracking disable"
+        }
+      ]
+    }
+  },
+  "Controllers": {
+    "ParamHit": {
+      "Items": [
+        {
+          "Name": "<區域special>",
+          "Axis": 0,
+          "Factor": 0.01,
+          "ReleaseType": 0
+        },
+        {
+          "Name": "xiongzxl",
+          "Id": "xiongzxl",
+          "HitArea": "ArtMesh191",
+          "Axis": 1,
+          "Factor": -0.001,
+          "ReleaseType": 3
+        },
+        {
+          "Name": "xiongzxl",
+          "Id": "xiongzxl",
+          "HitArea": "TouchSpecial",
+          "Axis": 1,
+          "Factor": -0.001,
+          "ReleaseType": 3
+        },
+        {
+          "Name": "shentixuanzhuanY",
+          "Id": "shentixuanzhuanY",
+          "HitArea": "TouchSpecial",
+          "Axis": 1,
+          "Factor": -0.005,
+          "ReleaseType": 3
+        },
+        {
+          "Name": "lxiongjqh",
+          "Id": "lxiongjqh",
+          "HitArea": "TouchSpecial",
+          "Axis": 1,
+          "Factor": -0.01,
+          "ReleaseType": 3
+        },
+        {
+          "Name": "<區域mesh255>",
+          "Axis": 0,
+          "Factor": 0.01,
+          "ReleaseType": 0
+        },
+        {
+          "Name": "ParamAngleX",
+          "Id": "ParamAngleX",
+          "HitArea": "ArtMesh255",
+          "Axis": 0,
+          "Factor": 0.01,
+          "ReleaseType": 0
+        },
+        {
+          "Name": "ParamAngleY",
+          "Id": "ParamAngleY",
+          "HitArea": "ArtMesh255",
+          "Axis": 1,
+          "Factor": -0.01,
+          "ReleaseType": 0
+        },
+        {
+          "Name": "ParamAngleZ",
+          "Id": "ParamAngleZ",
+          "HitArea": "ArtMesh255",
+          "Axis": 0,
+          "Factor": 0.01,
+          "ReleaseType": 0
+        },
+        {
+          "Name": "ParamBodyAngleX",
+          "Id": "ParamBodyAngleX",
+          "HitArea": "ArtMesh255",
+          "Axis": 0,
+          "Factor": 0.01,
+          "ReleaseType": 0
+        },
+        {
+          "Name": "shentixuanzhuanY",
+          "Id": "shentixuanzhuanY",
+          "HitArea": "ArtMesh255",
+          "Axis": 1,
+          "Factor": -0.001,
+          "ReleaseType": 0
+        },
+        {
+          "Name": "sdxiong",
+          "Id": "sdxiong",
+          "HitArea": "ArtMesh255",
+          "Axis": 0,
+          "Factor": 0.0005,
+          "Release": 0,
+          "ReleaseType": 0,
+          "LowPriority": true
+        },
+        { "Name": "<區域body>", "Axis": 0, "Factor": 0.01, "ReleaseType": 0 },
+        {
+          "Name": "ParamAngleX",
+          "Id": "ParamAngleX",
+          "HitArea": "TouchBody",
+          "Axis": 0,
+          "Factor": 0.01,
+          "ReleaseType": 0
+        },
+        {
+          "Name": "ParamAngleY",
+          "Id": "ParamAngleY",
+          "HitArea": "TouchBody",
+          "Axis": 1,
+          "Factor": -0.01,
+          "ReleaseType": 0
+        },
+        {
+          "Name": "ParamAngleZ",
+          "Id": "ParamAngleZ",
+          "HitArea": "TouchBody",
+          "Axis": 0,
+          "Factor": 0.01,
+          "ReleaseType": 0
+        },
+        {
+          "Name": "ParamBodyAngleX",
+          "Id": "ParamBodyAngleX",
+          "HitArea": "TouchBody",
+          "Axis": 0,
+          "Factor": 0.01,
+          "ReleaseType": 0
+        },
+        {
+          "Name": "shentixuanzhuanY",
+          "Id": "shentixuanzhuanY",
+          "HitArea": "TouchBody",
+          "Axis": 1,
+          "Factor": -0.001,
+          "ReleaseType": 0
+        },
+        {
+          "Name": "sdxiong",
+          "Id": "sdxiong",
+          "HitArea": "TouchBody",
+          "Axis": 0,
+          "Factor": 0.0005,
+          "ReleaseType": 0,
+          "LowPriority": true
+        }
+      ],
+      "Enabled": true
+    },
+    "ParamLoop": {},
+    "KeyTrigger": {},
+    "ParamTrigger": {},
+    "AreaTrigger": {},
+    "HandTrigger": {},
+    "EyeBlink": { "MinInterval": 500, "MaxInterval": 6000, "Enabled": true },
+    "LipSync": { "Gain": 5.0 },
+    "MouseTracking": {
+      "SmoothTime": 0.15258792,
+      "Items": [
+        {
+          "Id": "ParamAngleX",
+          "Min": -30.0,
+          "Max": 30.0,
+          "BlendMode": 1,
+          "Input": 1
+        },
+        {
+          "Id": "ParamAngleY",
+          "Min": -30.0,
+          "Max": 30.0,
+          "BlendMode": 1,
+          "Input": 2
+        },
+        {
+          "Id": "ParamAngleZ",
+          "Min": -30.0,
+          "Max": 30.0,
+          "BlendMode": 1,
+          "Input": 1
+        },
+        { "Id": "sdxiong", "Min": 0.0, "Max": 1.0, "BlendMode": 1, "Input": 1 },
+        {
+          "Id": "ParamBodyAngleX",
+          "Min": -10.0,
+          "Max": 10.0,
+          "BlendMode": 1,
+          "Input": 1
+        }
+      ],
+      "Enabled": true
+    },
+    "AutoBreath": { "Enabled": true },
+    "ExtraMotion": { "Enabled": true },
+    "Accelerometer": { "Enabled": true },
+    "Microphone": {},
+    "Transform": {},
+    "FaceTracking": { "Enabled": true },
+    "HandTracking": {},
+    "ParamValue": {},
+    "PartOpacity": {
+      "Items": [
+        { "Name": "part9", "Text": "背景", "Ids": ["Part9"], "Value": 1.0 },
+        {
+          "Name": "part13",
+          "Text": "後面四人",
+          "Ids": ["Part13"],
+          "Value": 1.0
+        }
+      ],
+      "Enabled": true
+    },
+    "ArtmeshOpacity": {
+      "Items": [
+        {
+          "Name": "超健全空間",
+          "Text": "超健全空間",
+          "Ids": [
+            "ArtMesh190",
+            "ArtMesh191",
+            "ArtMesh192",
+            "ArtMesh193",
+            "ArtMesh194",
+            "ArtMesh279",
+            "ArtMesh110",
+            "ArtMesh111",
+            "ArtMesh112",
+            "ArtMesh113",
+            "ArtMesh15",
+            "ArtMesh16",
+            "ArtMesh207",
+            "ArtMesh421"
+          ],
+          "Value": 1.0
+        },
+        {
+          "Name": "帶子",
+          "Text": "帶子",
+          "Ids": ["ArtMesh190", "ArtMesh15", "ArtMesh16"],
+          "Value": 1.0
+        }
+      ],
+      "Enabled": true
+    },
+    "ArtmeshColor": {},
+    "ArtmeshCulling": { "DefaultMode": 0 },
+    "IntimacySystem": {}
+  },
+  "HitAreas": [
+    { "Name": "摸胸", "Id": "TouchSpecial", "Order": 2 },
+    { "Name": "摸头", "Id": "TouchHead" },
+    { "Name": "右眼", "Id": "ArtMesh162", "Order": 2 },
+    { "Name": "左眼", "Id": "ArtMesh150", "Order": 2 },
+    { "Name": "摸右手", "Id": "ArtMesh24", "Order": 2 },
+    { "Name": "摸左手", "Id": "ArtMesh209", "Order": 2 },
+    { "Name": "摸乳沟", "Id": "ArtMesh191", "Order": 4 },
+    { "Name": "摸右腿", "Id": "ArtMesh407", "Order": 2 },
+    { "Name": "摸左腿", "Id": "ArtMesh263", "Order": 1 },
+    { "Name": "摸头发", "Id": "ArtMesh132", "Order": 4 },
+    { "Name": "左上角红花", "Id": "ArtMesh59" },
+    { "Name": "右上角红花", "Id": "ArtMesh57" },
+    {
+      "Name": "ArtMesh127",
+      "Id": "ArtMesh127",
+      "Order": 2,
+      "Motion": "choice"
+    },
+    { "Name": "ArtMesh255", "Id": "ArtMesh255" }
+  ],
+  "Options": { "TexFixed": true }
+}

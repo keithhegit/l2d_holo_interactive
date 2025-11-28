@@ -4,8 +4,9 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { nextTick, ref, watch } from 'vue'
+import { nextTick, ref, watch, onMounted, onBeforeUnmount } from 'vue'
 import Live2D from '@/views/Tools/Live2DTool/Components/Live2D.vue'
+import HandTracker from '@/views/Tools/Live2DTool/Components/HandTracker.vue'
 import { Button } from '@/components/ui/button'
 import { Slider } from '@/components/ui/slider'
 import { SliderRange, SliderTrack } from 'reka-ui'
@@ -191,6 +192,37 @@ watch(hitFrameVisible, (val) => {
   console.log(val)
   l2dRef.value?.erosModel?.setHitAreaFrames?.(val)
 })
+
+const gestureToMotion: Record<string, string> = {
+  OPEN: '摸头',
+  OPEN_LEFT: '摸左手',
+  OPEN_RIGHT: '摸右手',
+  OPEN_UP: '左上角红花',
+  OPEN_DOWN: '摸胸',
+  CLOSED: '摸右腿',
+  PINCH: '右上角红花',
+  PINCH_LEFT: '左眼',
+  PINCH_RIGHT: '右眼',
+  PINCH_UP: '摸头发',
+  PINCH_DOWN: '摸左腿'
+}
+
+const gestureHandler = (e: Event) => {
+  const detail = (e as CustomEvent).detail as { gesture: string }
+  const key = detail?.gesture
+  const motion = key ? gestureToMotion[key] : undefined
+  if (motion) {
+    l2dRef.value?.erosModel?.motionTrigger?.(motion)
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('holo3d-gesture', gestureHandler)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('holo3d-gesture', gestureHandler)
+})
 </script>
 
 <template>
@@ -229,6 +261,7 @@ watch(hitFrameVisible, (val) => {
                 }
               }"
             />
+            <HandTracker />
             <!-- 拖拽句柄 -->
             <div
               class="absolute bottom-0 right-0 w-5 h-5 cursor-nw-resize opacity-60 hover:opacity-100 transition-opacity flex items-center justify-center"
