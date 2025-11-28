@@ -5,12 +5,15 @@ import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { nextTick, ref, watch, onMounted, onBeforeUnmount } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import Live2D from '@/views/Tools/Live2DTool/Components/Live2D.vue'
 import HandTracker from '@/views/Tools/Live2DTool/Components/HandTracker.vue'
 import { Button } from '@/components/ui/button'
 import { Slider } from '@/components/ui/slider'
 import { SliderRange, SliderTrack } from 'reka-ui'
 import { Switch } from '@/components/ui/switch'
+const route = useRoute()
+const router = useRouter()
 const aspectRatio = ref([0.15])
 const angle = ref([0])
 const anchor = ref({
@@ -155,24 +158,13 @@ const reset = () => {
       console.warn(e)
     }
     const motionManager = l2dRef.value.erosModel.model.internalModel.motionManager
-    const motionGroups = []
+    const motionGroups: Array<{ name: string; count: number }> = []
 
     const definitions = motionManager.definitions
 
     for (const [group, motions] of Object.entries(definitions)) {
-      console.log(motions)
-      motionGroups.push({
-        name: group,
-        motions: 'motions'
-        // motions
-        //   ?.map((motion, index) => ({
-        //     file: motion.file || motion.File || '',
-        //     error: motionManager.motionGroups[group]![index]! === null ? 'Failed to load' : undefined
-        //   }))
-        //   .filter((item) => item.file) || []
-      })
+      motionGroups.push({ name: group, count: Array.isArray(motions) ? motions.length : 0 })
     }
-    motionDrawer.value = true
     motionFileList.value = motionGroups
     console.log(motionGroups)
   })
@@ -218,6 +210,11 @@ const gestureHandler = (e: Event) => {
 
 onMounted(() => {
   window.addEventListener('holo3d-gesture', gestureHandler)
+  const name = route.params.name as string | undefined
+  if (name) {
+    modelPath.value = onlineUrl.replace('?', name)
+    reset()
+  }
 })
 
 onBeforeUnmount(() => {
@@ -246,6 +243,12 @@ onBeforeUnmount(() => {
               maxHeight: '900px'
             }"
           >
+            <button
+              class="absolute top-2 left-2 px-2 py-1 text-xs bg-gray-200 dark:bg-gray-700 rounded"
+              @click="() => { clear(); router.push('/') }"
+            >
+              返回
+            </button>
             <Live2D
               v-if="show"
               ref="l2dRef"
@@ -273,6 +276,23 @@ onBeforeUnmount(() => {
                 <path d="M12 0L0 12H4L12 4V0Z" fill="currentColor" />
                 <path d="M12 8L8 12H12V8Z" fill="currentColor" />
               </svg>
+            </div>
+            <button
+              class="absolute bottom-2 right-2 px-2 py-1 text-xs bg-gray-200 dark:bg-gray-700 rounded"
+              @click="motionDrawer = !motionDrawer"
+            >
+              动作说明
+            </button>
+            <div
+              v-if="motionDrawer"
+              class="absolute bottom-10 right-2 bg-white dark:bg-gray-800 border rounded-lg p-3 w-64 max-h-64 overflow-auto shadow"
+            >
+              <div class="text-sm font-semibold mb-2">当前模型动作列表</div>
+              <div v-for="g in motionFileList" :key="g.name" class="text-xs py-1 flex justify-between">
+                <span>{{ g.name }}</span>
+                <span>{{ g.count }}</span>
+              </div>
+              <div class="mt-2 text-xs text-muted-foreground">手势触发11项动作，具体效果依模型定义</div>
             </div>
           </div>
 
@@ -1281,3 +1301,5 @@ defineExpose({
 </style>
 
 -->
+const route = useRoute()
+const router = useRouter()

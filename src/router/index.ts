@@ -3,7 +3,12 @@ import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
   {
     path: '/',
-    name: 'Live2DTool',
+    name: 'Landing',
+    component: () => import('@/views/Landing/index.vue')
+  },
+  {
+    path: '/render/:name',
+    name: 'Live2DRender',
     component: () => import('@/views/Tools/Live2DTool/index.vue')
   },
   {
