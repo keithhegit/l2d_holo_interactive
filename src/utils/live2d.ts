@@ -76,7 +76,12 @@ export class Live2dCreator {
       }
     })
     // 模型的缩放
-    model.scale.set(this.modelOption.params.scale || 0.15)
+    // 使用高度适配逻辑初始化缩放
+    const containerHeight = document.getElementById(this.modelOption.containerID).getBoundingClientRect().height
+    const baseScale = this.modelOption.params.scale || 0.15
+    const heightRatio = containerHeight / 812
+    model.scale.set(baseScale * heightRatio)
+
     model.anchor.set(this.modelOption.params?.anchor?.x || 0.5, this.modelOption.params?.anchor?.y || 0.5)
     model.rotation = Math.PI * this.modelOption.params.rotate * 2 || 0
     // 模型的位置,x,y相较于窗口左上角
@@ -89,11 +94,14 @@ export class Live2dCreator {
   }
 
   setScale(scale) {
-    const targetArea =
-      document.getElementById(this.modelOption.containerID).getBoundingClientRect().width *
-      document.getElementById(this.modelOption.containerID).getBoundingClientRect().height
-    const area1 = 375 * 812
-    const targetScale = scale * (targetArea / area1)
+    const container = document.getElementById(this.modelOption.containerID)
+    if (!container) return
+    // 基于高度进行缩放适配，基准高度为 812 (iPhone X)
+    // 这样可以保证在不同屏幕上模型相对于屏幕高度的比例一致
+    const heightRatio = container.clientHeight / 812
+    // 限制最大缩放比例，防止在超大屏幕上过大
+    const targetScale = scale * heightRatio
+
     window.erosModel.scale.set(targetScale)
     window.erosModel.x = document.getElementById(this.modelOption.canvasID).clientWidth / 2
     window.erosModel.y = document.getElementById(this.modelOption.canvasID).clientHeight / 2

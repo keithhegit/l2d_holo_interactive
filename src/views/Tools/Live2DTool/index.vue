@@ -141,7 +141,7 @@ onBeforeUnmount(() => {
         v-if="show"
         ref="l2dRef"
         class="w-full h-full absolute inset-0"
-        :style="{ background: bgImage ? `url('${bgImage}') center / cover no-repeat` : undefined }"
+        :style="{ background: bgImage ? `url('${bgImage}') center / cover no-repeat` : 'black' }"
         :asset-url="modelPath"
         :bg="bgImage"
         :params="{
@@ -157,7 +157,7 @@ onBeforeUnmount(() => {
       <!-- 摄像头层 (默认隐藏，仅逻辑存在，或通过开关控制显示) -->
       <div
         v-show="cameraEnabled"
-        class="absolute bottom-24 left-4 z-10 opacity-50 hover:opacity-100 transition-opacity"
+        class="absolute bottom-24 right-6 z-10 opacity-80 hover:opacity-100 transition-opacity"
       >
         <!-- HandTracker 组件内部可能有自己的 UI，这里作为容器 -->
         <HandTracker />

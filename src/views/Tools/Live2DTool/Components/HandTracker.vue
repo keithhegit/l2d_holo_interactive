@@ -35,7 +35,10 @@ const onResults = (results: any) => {
     if (results.multiHandLandmarks) {
       for (const landmarks of results.multiHandLandmarks) {
         if ((window as any).drawConnectors && (window as any).HAND_CONNECTIONS) {
-          ;(window as any).drawConnectors(ctx, landmarks, (window as any).HAND_CONNECTIONS, { color: '#00FF00', lineWidth: 1 })
+          ;(window as any).drawConnectors(ctx, landmarks, (window as any).HAND_CONNECTIONS, {
+            color: '#00FF00',
+            lineWidth: 1
+          })
         }
         if ((window as any).drawLandmarks) {
           ;(window as any).drawLandmarks(ctx, landmarks, { color: '#FF0000', lineWidth: 1, radius: 2 })
@@ -99,7 +102,9 @@ onMounted(async () => {
     await videoRef.value.play()
     isReady.value = true
   }
-  hands = new (window as any).Hands({ locateFile: (file: string) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}` })
+  hands = new (window as any).Hands({
+    locateFile: (file: string) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`
+  })
   hands.setOptions({ maxNumHands: 1, modelComplexity: 1, minDetectionConfidence: 0.5, minTrackingConfidence: 0.5 })
   hands.onResults(onResults)
   const loop = async () => {
@@ -120,10 +125,14 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="pointer-events-none absolute bottom-5 right-5 z-20 w-48 h-36 border border-cyan-800 bg-black/80 rounded-lg overflow-hidden shadow-[0_0_15px_rgba(0,255,255,0.2)]">
+  <div
+    class="pointer-events-none w-48 h-36 border border-cyan-800 bg-black/80 rounded-lg overflow-hidden shadow-[0_0_15px_rgba(0,255,255,0.2)]"
+  >
     <video ref="videoRef" class="absolute inset-0 w-full h-full object-cover opacity-50" playsinline muted></video>
     <canvas ref="canvasRef" class="absolute inset-0 w-full h-full object-cover z-10"></canvas>
-    <div v-if="!isReady" class="absolute inset-0 flex items-center justify-center text-cyan-500 text-xs">INITIALIZING CAM...</div>
+    <div v-if="!isReady" class="absolute inset-0 flex items-center justify-center text-cyan-500 text-xs">
+      INITIALIZING CAM...
+    </div>
   </div>
 </template>
 
