@@ -74,29 +74,29 @@ const goBack = () => {
 }
 
 const gestureToMotion: Record<string, string[]> = {
-  OPEN: ['摸身体', 'TouchBody', 'Body', 'Idle'],
-  OPEN_UP: ['摸头', 'Head', 'Pat', '左上角红花'],
-  OPEN_DOWN: ['摸胸', 'Chest', '摸左腿', '摸右腿'],
-  OPEN_LEFT: ['摸手', '摸左手', 'LeftHand', 'TouchSpecial'],
+  OPEN_LEFT: ['摸手', '摸左手', 'LeftHand', 'TouchSpecial', '摸身体'],
   OPEN_RIGHT: ['触摸', '摸右手', 'RightHand', 'Shake'],
+  THUMBS_UP: ['摸头', 'Head', 'Pat', '左上角红花'],
+  PISTOL: ['Tap背景', 'Tap', '右上角红花'],
+  THREE: ['摸胸', 'Chest', '摸左腿', '摸右腿'],
+  FOUR: ['摸头发', 'Hair', '台词鉴赏', 'PullHair'],
+  OPEN: ['摸身体', 'TouchBody', 'Body', 'Idle'],
   CLOSED: ['Shake', '摸右腿', 'Fist', 'Angry'],
-  PINCH: ['Tap背景', 'Tap', '右上角红花'],
-  PINCH_DOWN: ['掀裙子', 'Skirt', 'PullSkirt', '摸左腿'],
-  PINCH_UP: ['摸头发', 'Hair', '台词鉴赏', 'PullHair'],
+  PINCH: ['掀裙子', 'Skirt', 'PullSkirt', '摸左腿'],
   PINCH_LEFT: ['左眼', 'LeftEye', '选项', 'PokeLeft'],
   PINCH_RIGHT: ['右眼', 'RightEye', 'Start', 'PokeRight']
 }
 
 const gestureDescriptions: Record<string, string> = {
-  OPEN: '五指张开（身体）',
-  OPEN_UP: '五指张开（上）',
-  OPEN_DOWN: '五指张开（下）',
-  OPEN_LEFT: '五指张开（左）',
-  OPEN_RIGHT: '五指张开（右）',
+  OPEN_LEFT: '左扇耳光 (左滑)',
+  OPEN_RIGHT: '右扇耳光 (右滑)',
+  THUMBS_UP: '拇指点赞',
+  PISTOL: '手枪手势',
+  THREE: '举三指',
+  FOUR: '举四指',
+  OPEN: '五指张开',
   CLOSED: '握拳',
-  PINCH: '拇食指捏（可拖动）',
-  PINCH_DOWN: '拇食指捏（下，拖动）',
-  PINCH_UP: '拇食指捏（上，拖动）',
+  PINCH: '拇食指捏',
   PINCH_LEFT: '拇食指捏（左，拖动）',
   PINCH_RIGHT: '拇食指捏（右，拖动）'
 }

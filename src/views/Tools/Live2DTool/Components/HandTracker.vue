@@ -58,28 +58,78 @@ const onResults = (results: any) => {
     const getDistance = (p1: any, p2: any) => Math.hypot(p1.x - p2.x, p1.y - p2.y)
     const pinchDistance = getDistance(indexTip, thumbTip)
     const isPinching = pinchDistance < 0.05
-    let extended = 0
+
+    // Finger States: Thumb, Index, Middle, Ring, Pinky
+    const fingerStates = [false, false, false, false, false]
     const fingerTips = [8, 12, 16, 20]
     const fingerPips = [6, 10, 14, 18]
+
+    // Check Index, Middle, Ring, Pinky
     for (let i = 0; i < fingerTips.length; i++) {
       const tipDist = getDistance(lm[fingerTips[i]], wrist)
       const pipDist = getDistance(lm[fingerPips[i]], wrist)
-      if (tipDist > pipDist * 1.1) extended++
+      if (tipDist > pipDist * 1.1) {
+        fingerStates[i + 1] = true
+      }
     }
+
+    // Check Thumb
+    // Thumb is tricky. Simplified check: tip is far from index MCP (5) and Pinky MCP (17)
     const thumbDist = getDistance(thumbTip, lm[17])
-    const isThumbExtended = thumbDist > 0.2
-    if (isThumbExtended) extended++
+    const thumbPip = lm[2]
+    const thumbTipDist = getDistance(thumbTip, wrist)
+    const thumbPipDist = getDistance(thumbPip, wrist)
+    // 拇指伸直通常意味着指尖离手腕比关节远，且横向张开
+    const isThumbExtended = thumbDist > 0.15 && thumbTipDist > thumbPipDist
+    if (isThumbExtended) fingerStates[0] = true
+
+    const extendedCount = fingerStates.filter((s) => s).length
+
     let base = 'IDLE'
-    if (isPinching) base = 'PINCH'
-    else if (extended >= 4) base = 'OPEN'
-    else if (extended <= 1) base = 'CLOSED'
+
+    // Classification logic
+    // Priority: Special Gestures -> Count -> General
+
+    // THUMBS_UP: Thumb extended, others curled (Index, Middle, Ring, Pinky false)
+    if (fingerStates[0] && !fingerStates[1] && !fingerStates[2] && !fingerStates[3] && !fingerStates[4]) {
+      base = 'THUMBS_UP'
+    }
+    // PISTOL: Thumb and Index extended, others curled
+    else if (fingerStates[0] && fingerStates[1] && !fingerStates[2] && !fingerStates[3] && !fingerStates[4]) {
+      base = 'PISTOL'
+    }
+    // THREE: 3 fingers extended (Any 3, usually Thumb+Index+Middle or Index+Middle+Ring)
+    else if (extendedCount === 3) {
+      base = 'THREE'
+    }
+    // FOUR: 4 fingers extended
+    else if (extendedCount === 4) {
+      base = 'FOUR'
+    }
+    // OPEN: 5 fingers extended
+    else if (extendedCount === 5) {
+      base = 'OPEN'
+    }
+    // CLOSED: 0 or 1 finger extended (if not Thumbs Up/Pistol)
+    else if (extendedCount <= 1) {
+      // Double check pinch
+      if (isPinching) base = 'PINCH'
+      else base = 'CLOSED'
+    } else if (isPinching) {
+      base = 'PINCH'
+    }
+
     const dx = cursorX - prevX
     const dy = cursorY - prevY
     const absX = Math.abs(dx)
     const absY = Math.abs(dy)
     const THR = 0.03
+
     let gesture = base
-    if (base === 'PINCH' || base === 'OPEN' || base === 'CLOSED') {
+
+    // Only allow direction modifiers for specific base gestures to avoid confusion
+    // Users specifically asked for "Swipe Left/Right" (Open Left/Right)
+    if (base === 'OPEN' || base === 'CLOSED') {
       if (Math.max(absX, absY) > THR) {
         let dir = ''
         if (absX >= absY) dir = dx > 0 ? 'RIGHT' : 'LEFT'
