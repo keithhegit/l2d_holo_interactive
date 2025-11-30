@@ -87,6 +87,26 @@ const gestureToMotion: Record<string, string> = {
   PINCH_DOWN: '摸左腿'
 }
 
+const gestureDescriptions: Record<string, string> = {
+  OPEN: '五指张开',
+  OPEN_LEFT: '五指张开（左）',
+  OPEN_RIGHT: '五指张开（右）',
+  OPEN_UP: '五指张开（上）',
+  OPEN_DOWN: '五指张开（下）',
+  CLOSED: '握拳',
+  PINCH: '拇食指捏（可拖动）',
+  PINCH_LEFT: '拇食指捏（左，拖动）',
+  PINCH_RIGHT: '拇食指捏（右，拖动）',
+  PINCH_UP: '拇食指捏（上，拖动）',
+  PINCH_DOWN: '拇食指捏（下，拖动）'
+}
+
+const gesturesFor = (group: string) => {
+  return Object.entries(gestureToMotion)
+    .filter(([, m]) => m === group)
+    .map(([g]) => gestureDescriptions[g] ?? g)
+}
+
 const gestureHandler = (e: Event) => {
   if (!cameraEnabled.value) return
   const detail = (e as CustomEvent).detail as { gesture: string }
@@ -200,11 +220,18 @@ onBeforeUnmount(() => {
             <DropdownMenuItem
               v-for="motion in motionFileList"
               :key="motion.name"
-              class="flex justify-between cursor-pointer hover:bg-white/10 focus:bg-white/10 focus:text-white"
+              class="cursor-pointer hover:bg-white/10 focus:bg-white/10 focus:text-white"
               @click="triggerMotion(motion.name)"
             >
-              <span>{{ motion.name }}</span>
-              <span class="text-xs text-white/40 bg-white/5 px-1.5 py-0.5 rounded">{{ motion.count }}</span>
+              <div class="w-full">
+                <div class="flex justify-between items-center">
+                  <span>{{ motion.name }}</span>
+                  <span class="text-xs text-white/40 bg-white/5 px-1.5 py-0.5 rounded">{{ motion.count }}</span>
+                </div>
+                <div class="mt-1 text-xs text-white/60">
+                  手势：{{ gesturesFor(motion.name).length ? gesturesFor(motion.name).join('、') : '无手势触发' }}
+                </div>
+              </div>
             </DropdownMenuItem>
             <div v-if="motionFileList.length === 0" class="p-2 text-sm text-white/40 text-center">
               加载中或无动作数据
