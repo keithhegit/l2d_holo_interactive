@@ -73,37 +73,37 @@ const goBack = () => {
   router.push('/')
 }
 
-const gestureToMotion: Record<string, string> = {
-  OPEN: '摸头',
-  OPEN_LEFT: '摸左手',
-  OPEN_RIGHT: '摸右手',
-  OPEN_UP: '左上角红花',
-  OPEN_DOWN: '摸胸',
-  CLOSED: '摸右腿',
-  PINCH: '右上角红花',
-  PINCH_LEFT: '左眼',
-  PINCH_RIGHT: '右眼',
-  PINCH_UP: '摸头发',
-  PINCH_DOWN: '摸左腿'
+const gestureToMotion: Record<string, string[]> = {
+  OPEN: ['摸身体', 'TouchBody', 'Body', 'Idle'],
+  OPEN_UP: ['摸头', 'Head', 'Pat', '左上角红花'],
+  OPEN_DOWN: ['摸胸', 'Chest', '摸左腿', '摸右腿'],
+  OPEN_LEFT: ['摸手', '摸左手', 'LeftHand', 'TouchSpecial'],
+  OPEN_RIGHT: ['触摸', '摸右手', 'RightHand', 'Shake'],
+  CLOSED: ['Shake', '摸右腿', 'Fist', 'Angry'],
+  PINCH: ['Tap背景', 'Tap', '右上角红花'],
+  PINCH_DOWN: ['掀裙子', 'Skirt', 'PullSkirt', '摸左腿'],
+  PINCH_UP: ['摸头发', 'Hair', '台词鉴赏', 'PullHair'],
+  PINCH_LEFT: ['左眼', 'LeftEye', '选项', 'PokeLeft'],
+  PINCH_RIGHT: ['右眼', 'RightEye', 'Start', 'PokeRight']
 }
 
 const gestureDescriptions: Record<string, string> = {
-  OPEN: '五指张开',
-  OPEN_LEFT: '五指张开（左）',
-  OPEN_RIGHT: '五指张开（右）',
+  OPEN: '五指张开（身体）',
   OPEN_UP: '五指张开（上）',
   OPEN_DOWN: '五指张开（下）',
+  OPEN_LEFT: '五指张开（左）',
+  OPEN_RIGHT: '五指张开（右）',
   CLOSED: '握拳',
   PINCH: '拇食指捏（可拖动）',
-  PINCH_LEFT: '拇食指捏（左，拖动）',
-  PINCH_RIGHT: '拇食指捏（右，拖动）',
+  PINCH_DOWN: '拇食指捏（下，拖动）',
   PINCH_UP: '拇食指捏（上，拖动）',
-  PINCH_DOWN: '拇食指捏（下，拖动）'
+  PINCH_LEFT: '拇食指捏（左，拖动）',
+  PINCH_RIGHT: '拇食指捏（右，拖动）'
 }
 
 const gesturesFor = (group: string) => {
   return Object.entries(gestureToMotion)
-    .filter(([, m]) => m === group)
+    .filter(([, motions]) => motions.includes(group))
     .map(([g]) => gestureDescriptions[g] ?? g)
 }
 
@@ -111,9 +111,12 @@ const gestureHandler = (e: Event) => {
   if (!cameraEnabled.value) return
   const detail = (e as CustomEvent).detail as { gesture: string }
   const key = detail?.gesture
-  const motion = key ? gestureToMotion[key] : undefined
-  if (motion) {
-    triggerMotion(motion)
+  const motions = key ? gestureToMotion[key] : undefined
+  if (motions) {
+    const availableMotion = motions.find((m) => motionFileList.value.some((item) => item.name === m))
+    if (availableMotion) {
+      triggerMotion(availableMotion)
+    }
   }
 }
 
