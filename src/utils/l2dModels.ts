@@ -8,6 +8,11 @@ export interface Model {
   actionCount: number
   cover?: string
   tags?: string[]
+  params?: {
+    scale?: number
+    x?: number
+    y?: number
+  }
 }
 
 export const models: Model[] = [
@@ -32,72 +37,6 @@ export const models: Model[] = [
     actionCount: 4,
     cover: 'https://pub-c98d5902eedf42f6a9765dfad981fd88.r2.dev/L2D/1678.jpg',
     tags: ['Isolde2', 'Live2D']
-  },
-  {
-    id: 2106,
-    folderName: 'Lumi',
-    uploadTime: '2025/3/4 10:18',
-    url: 'https://ugenie.net/api/uploads/live2d/Lumi/model.json',
-    characterId: 100498,
-    name: '天降系妹妹',
-    actionCount: 4,
-    cover: 'https://pub-c98d5902eedf42f6a9765dfad981fd88.r2.dev/L2D/2106.jpg',
-    tags: ['Lumi', 'Live2D']
-  },
-  {
-    id: 2145,
-    folderName: 'Mika',
-    uploadTime: '2025/3/4 12:20',
-    url: 'https://ugenie.net/api/uploads/live2d/Mika/model.json',
-    characterId: 100455,
-    name: '赛博陪玩',
-    actionCount: 2,
-    cover: 'https://pub-c98d5902eedf42f6a9765dfad981fd88.r2.dev/L2D/2145.jpg',
-    tags: ['Mika', 'Live2D']
-  },
-  {
-    id: 2146,
-    folderName: 'Chloe',
-    uploadTime: '2025/3/4 12:20',
-    url: 'https://ugenie.net/api/uploads/live2d/Chloe/model.json',
-    characterId: 100408,
-    name: '摸鱼女大学生',
-    actionCount: 8,
-    cover: 'https://pub-c98d5902eedf42f6a9765dfad981fd88.r2.dev/L2D/2146.jpg',
-    tags: ['Chloe', 'Live2D']
-  },
-  {
-    id: 2202,
-    folderName: 'ruby0',
-    uploadTime: '2025/3/4 18:05',
-    url: 'https://ugenie.net/api/uploads/live2d/ruby0/model.json',
-    characterId: 100410,
-    name: '不受控制的时间跳跃者',
-    actionCount: 7,
-    cover: 'https://pub-c98d5902eedf42f6a9765dfad981fd88.r2.dev/L2D/2202.jpg',
-    tags: ['ruby0', 'Live2D']
-  },
-  {
-    id: 2217,
-    folderName: 'Elena',
-    uploadTime: '2025/3/19 13:48',
-    url: 'https://ugenie.net/api/uploads/live2d/Elena/model.json',
-    characterId: 100411,
-    name: '网络调情者',
-    actionCount: 4,
-    cover: 'https://pub-c98d5902eedf42f6a9765dfad981fd88.r2.dev/L2D/2217.jpg',
-    tags: ['Elena', 'Live2D']
-  },
-  {
-    id: 2242,
-    folderName: 'mikamale',
-    uploadTime: '2025/5/28 11:48',
-    url: 'https://ugenie.net/api/uploads/live2d/mikamale/model.json',
-    characterId: 100448,
-    name: '危险AI恋人',
-    actionCount: 4,
-    cover: 'https://pub-c98d5902eedf42f6a9765dfad981fd88.r2.dev/L2D/2242.jpg',
-    tags: ['mikamale', 'Live2D']
   },
   {
     id: 2731,
@@ -186,5 +125,90 @@ export const models: Model[] = [
     actionCount: 8,
     cover: 'https://pub-c98d5902eedf42f6a9765dfad981fd88.r2.dev/L2D/2972.jpg',
     tags: ['rowan', 'Live2D']
+  },
+  // Problem Models Moved to Bottom
+  {
+    id: 2106,
+    folderName: 'Lumi',
+    uploadTime: '2025/3/4 10:18',
+    url: 'https://ugenie.net/api/uploads/live2d/Lumi/model.json',
+    characterId: 100498,
+    name: '天降系妹妹',
+    actionCount: 4,
+    cover: 'https://pub-c98d5902eedf42f6a9765dfad981fd88.r2.dev/L2D/2106.jpg',
+    tags: ['Lumi', 'Live2D'],
+    params: {
+      scale: 0.1
+    }
+  },
+  {
+    id: 2145,
+    folderName: 'Mika',
+    uploadTime: '2025/3/4 12:20',
+    url: 'https://ugenie.net/api/uploads/live2d/Mika/model.json',
+    characterId: 100455,
+    name: '赛博陪玩',
+    actionCount: 2,
+    cover: 'https://pub-c98d5902eedf42f6a9765dfad981fd88.r2.dev/L2D/2145.jpg',
+    tags: ['Mika', 'Live2D'],
+    params: {
+      scale: 0.1
+    }
+  },
+  {
+    id: 2146,
+    folderName: 'Chloe',
+    uploadTime: '2025/3/4 12:20',
+    url: 'https://ugenie.net/api/uploads/live2d/Chloe/model.json',
+    characterId: 100408,
+    name: '摸鱼女大学生',
+    actionCount: 8,
+    cover: 'https://pub-c98d5902eedf42f6a9765dfad981fd88.r2.dev/L2D/2146.jpg',
+    tags: ['Chloe', 'Live2D'],
+    params: {
+      scale: 0.1
+    }
+  },
+  {
+    id: 2202,
+    folderName: 'ruby0',
+    uploadTime: '2025/3/4 18:05',
+    url: 'https://ugenie.net/api/uploads/live2d/ruby0/model.json',
+    characterId: 100410,
+    name: '不受控制的时间跳跃者',
+    actionCount: 7,
+    cover: 'https://pub-c98d5902eedf42f6a9765dfad981fd88.r2.dev/L2D/2202.jpg',
+    tags: ['ruby0', 'Live2D'],
+    params: {
+      scale: 0.1
+    }
+  },
+  {
+    id: 2242,
+    folderName: 'mikamale',
+    uploadTime: '2025/5/28 11:48',
+    url: 'https://ugenie.net/api/uploads/live2d/mikamale/model.json',
+    characterId: 100448,
+    name: '危险AI恋人',
+    actionCount: 4,
+    cover: 'https://pub-c98d5902eedf42f6a9765dfad981fd88.r2.dev/L2D/2242.jpg',
+    tags: ['mikamale', 'Live2D'],
+    params: {
+      scale: 0.1
+    }
+  },
+  {
+    id: 2217,
+    folderName: 'Elena',
+    uploadTime: '2025/3/19 13:48',
+    url: 'https://ugenie.net/api/uploads/live2d/Elena/model.json',
+    characterId: 100411,
+    name: '网络调情者',
+    actionCount: 4,
+    cover: 'https://pub-c98d5902eedf42f6a9765dfad981fd88.r2.dev/L2D/2217.jpg',
+    tags: ['Elena', 'Live2D'],
+    params: {
+      scale: 0.1
+    }
   }
 ]

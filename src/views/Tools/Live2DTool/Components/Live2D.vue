@@ -35,6 +35,8 @@ const createNewModel = async () => {
     })
   } catch (e) {
     console.warn(e)
+    loading.value = false
+    // You might want to show an error message here, but for now just stop loading
   }
   erosModel.value.registerHitEvent((hitAreaNames: string[]) => {
     console.log(hitAreaNames)

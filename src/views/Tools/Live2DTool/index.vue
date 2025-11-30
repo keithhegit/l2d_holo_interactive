@@ -131,6 +131,15 @@ onMounted(() => {
     const model = models.find((m) => m.folderName === name)
     if (model) {
       modelPath.value = model.url
+      if (model.params) {
+        aspectRatio.value = [model.params.scale ?? 0.15]
+        anchor.value.x = [model.params.x ?? 0.5]
+        anchor.value.y = [model.params.y ?? 0.5]
+      } else {
+        aspectRatio.value = [0.15]
+        anchor.value.x = [0.5]
+        anchor.value.y = [0.5]
+      }
     } else {
       modelPath.value = onlineUrl.replace('?', name)
     }
