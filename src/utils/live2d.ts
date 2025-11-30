@@ -11,7 +11,8 @@ interface ModelOption {
   containerID: string
   params?: {
     scale?: number
-    rotate: number
+    aspectRatio?: number
+    angle?: number
     anchor?: {
       x: number
       y: number
@@ -75,18 +76,20 @@ export class Live2dCreator {
         }
       }
     })
-    // 模型的缩放
-    // 使用高度适配逻辑初始化缩放
-    const containerHeight = document.getElementById(this.modelOption.containerID).getBoundingClientRect().height
-    const baseScale = this.modelOption.params.scale || 0.15
+    // 模型的缩放与定位（按容器高度适配，保持竖版画面）
+    const containerEl = document.getElementById(this.modelOption.containerID)
+    const containerRect = containerEl?.getBoundingClientRect()
+    const containerHeight = containerRect?.height ?? window.innerHeight
+    const containerWidth = containerRect?.width ?? window.innerWidth
+    const baseScale = this.modelOption.params?.aspectRatio ?? this.modelOption.params?.scale ?? 0.15
     const heightRatio = containerHeight / 812
     model.scale.set(baseScale * heightRatio)
 
     model.anchor.set(this.modelOption.params?.anchor?.x || 0.5, this.modelOption.params?.anchor?.y || 0.5)
-    model.rotation = Math.PI * this.modelOption.params.rotate * 2 || 0
-    // 模型的位置,x,y相较于窗口左上角
-    model.x = document.getElementById(this.modelOption.containerID).getBoundingClientRect().width / 2
-    model.y = document.getElementById(this.modelOption.containerID).getBoundingClientRect().height / 2
+    model.rotation = Math.PI * (this.modelOption.params?.angle ?? 0) * 2
+    // 模型的位置,x,y相较于容器左上角，居中
+    model.x = containerWidth / 2
+    model.y = containerHeight / 2
 
     // // 添加模型状态管理器
     model.InternalModel = new InternalModel(model)
@@ -95,28 +98,30 @@ export class Live2dCreator {
 
   setScale(scale) {
     const container = document.getElementById(this.modelOption.containerID)
-    if (!container) return
     // 基于高度进行缩放适配，基准高度为 812 (iPhone X)
     // 这样可以保证在不同屏幕上模型相对于屏幕高度的比例一致
-    const heightRatio = container.clientHeight / 812
+    const heightRatio = (container?.clientHeight ?? window.innerHeight) / 812
     // 限制最大缩放比例，防止在超大屏幕上过大
     const targetScale = scale * heightRatio
 
     window.erosModel.scale.set(targetScale)
-    window.erosModel.x = document.getElementById(this.modelOption.canvasID).clientWidth / 2
-    window.erosModel.y = document.getElementById(this.modelOption.canvasID).clientHeight / 2
+    const rect = container?.getBoundingClientRect()
+    window.erosModel.x = (rect?.width ?? window.innerWidth) / 2
+    window.erosModel.y = (rect?.height ?? window.innerHeight) / 2
   }
 
   setAngle(angle) {
     window.erosModel.rotation = Math.PI * angle * 2
-    window.erosModel.x = document.getElementById(this.modelOption.containerID).getBoundingClientRect().width / 2
-    window.erosModel.y = document.getElementById(this.modelOption.containerID).getBoundingClientRect().height / 2
+    const rect = document.getElementById(this.modelOption.containerID)?.getBoundingClientRect()
+    window.erosModel.x = (rect?.width ?? window.innerWidth) / 2
+    window.erosModel.y = (rect?.height ?? window.innerHeight) / 2
   }
 
   setAnchor(x: number, y: number) {
     window.erosModel.anchor.set(x, y)
-    window.erosModel.x = document.getElementById(this.modelOption.containerID).getBoundingClientRect().width / 2
-    window.erosModel.y = document.getElementById(this.modelOption.containerID).getBoundingClientRect().height / 2
+    const rect = document.getElementById(this.modelOption.containerID)?.getBoundingClientRect()
+    window.erosModel.x = (rect?.width ?? window.innerWidth) / 2
+    window.erosModel.y = (rect?.height ?? window.innerHeight) / 2
   }
 
   setParameterValueById(id: string, value: number) {

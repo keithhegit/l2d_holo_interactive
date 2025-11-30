@@ -136,23 +136,25 @@ onBeforeUnmount(() => {
 
     <!-- 主要内容区域 (全屏) -->
     <div class="relative flex-1 w-full h-full flex items-center justify-center">
-      <!-- Live2D 渲染层 -->
-      <Live2D
-        v-if="show"
-        ref="l2dRef"
-        class="w-full h-full absolute inset-0"
-        :style="{ background: bgImage ? `url('${bgImage}') center / cover no-repeat` : 'black' }"
-        :asset-url="modelPath"
-        :bg="bgImage"
-        :params="{
-          aspectRatio: aspectRatio[0],
-          angle: angle[0] / 360,
-          anchor: {
-            x: anchor.x[0],
-            y: anchor.y[0]
-          }
-        }"
-      />
+      <div id="modelContainer" class="relative h-full" style="aspect-ratio: 9 / 16">
+        <!-- Live2D 渲染层 -->
+        <Live2D
+          v-if="show"
+          ref="l2dRef"
+          class="absolute inset-0 w-full h-full"
+          :style="{ background: bgImage ? `url('${bgImage}') center / cover no-repeat` : 'black' }"
+          :asset-url="modelPath"
+          :bg="bgImage"
+          :params="{
+            aspectRatio: aspectRatio[0],
+            angle: angle[0] / 360,
+            anchor: {
+              x: anchor.x[0],
+              y: anchor.y[0]
+            }
+          }"
+        />
+      </div>
 
       <!-- 摄像头层 (默认隐藏，仅逻辑存在，或通过开关控制显示) -->
       <div
