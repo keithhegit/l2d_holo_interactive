@@ -74,13 +74,13 @@ const goBack = () => {
 }
 
 const gestureToMotion: Record<string, string[]> = {
-  OPEN_LEFT: ['摸手', '摸左手', 'LeftHand', 'TouchSpecial', '摸身体'],
+  OPEN_LEFT: ['摸手', '摸左手', 'LeftHand', 'TouchArm', '摸身体'],
   OPEN_RIGHT: ['触摸', '摸右手', 'RightHand', 'Shake'],
-  THUMBS_UP: ['摸头', 'Head', 'Pat', '左上角红花'],
+  THUMBS_UP: ['摸头', 'Head', 'Pat', 'TouchHead', '左上角红花'],
   PISTOL: ['Tap背景', 'Tap', '右上角红花'],
-  THREE: ['摸胸', 'Chest', '摸左腿', '摸右腿'],
+  THREE: ['摸胸', 'Chest', 'TouchSpecial', '摸左腿', '摸右腿'],
   FOUR: ['摸头发', 'Hair', '台词鉴赏', 'PullHair'],
-  OPEN: ['摸身体', 'TouchBody', 'Body', 'Idle'],
+  OPEN: ['摸身体', 'TouchBody', 'TapBody', 'Body', 'Idle'],
   CLOSED: ['Shake', '摸右腿', 'Fist', 'Angry'],
   PINCH: ['掀裙子', 'Skirt', 'PullSkirt', '摸左腿'],
   PINCH_LEFT: ['左眼', 'LeftEye', '选项', 'PokeLeft'],
